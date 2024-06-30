@@ -430,6 +430,5 @@ function game(){
             closeTools();
         }
     })
-    openWordCollect();
 }
 game();
