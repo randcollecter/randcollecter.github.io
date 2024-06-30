@@ -8,7 +8,7 @@ class newWord{
         this.complated = elNotUndefined && el.complated;
         this.level = level;
         this.isSecret =  elNotUndefined ? el.isSecret : isSecret;
-        this.image = img ? `./images/wordsImages/level${level}/${word.toLowerCase()}.png` :"./images/wordsImages/no.png"
+        this.image = img ? `images/wordsImages/level${level}/${word.toLowerCase()}.png` :"images/wordsImages/no.png"
     }
 }
 let origDataUser = localStorage.getItem('randCollecter') || '';

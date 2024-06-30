@@ -1,1 +1,1 @@
-export default "key"
+export default "idHelloWorldJS"

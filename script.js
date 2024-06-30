@@ -3,10 +3,16 @@ import key from "./getKey.js";
 import data from "./dataWords.js";
 import shopData from "./shopData.js";
 function game(){
-    if(!navigator.userAgentData.mobile){
+    function isMobileDevice() {
+        var mobileRegex = /Mobi|Android|iPhone|iPad|iPod/i;
+        return mobileRegex.test(navigator.userAgent);
+    }
+
+    if (!isMobileDevice()) {
         alert("GO Mobile Mode");
         return;
     }
+
     const element = document.getElementById("wordCol");
     const randomButtonElm = document.getElementById('randButton');
     const levelElm = document.querySelectorAll('.levelNumber');
@@ -43,13 +49,13 @@ function game(){
     dataLocalStorage = dataLocalStorage ? JSON.parse(CryptoJS.AES.decrypt(dataLocalStorage, key).toString(CryptoJS.enc.Utf8)) : null;
     
     
-    const userData = dataLocalStorage || {balance: 999, level: 2, complatedElms: [], tools: {
+    const userData = dataLocalStorage || {balance: 0, level: 1, complatedElms: [], tools: {
             "changeWord" : {
                 length: 0,
                 active: false,
             },
             "encode" : {
-                length: 2,
+                length: 0,
                 active: false,
             }
         }};
