@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="./images/logo.jpeg">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.js"></script>
+    <title>RandCollecter</title>
+</head>
+<body>
+    <p class="none">BETA</p>
+    <div id="app">
+        <div id="balance" class="center">
+            <p><span id="balanceScore" class="">0</span> <span class="ticket icon"></span></p>
+            <div class="toolGroup black">
+                <p class="icon tool" id="toolButton"></p>
+                <div class="none" id="tools">
+                    <div id="wordChangeDiv">
+                        <p class="changeWord icon"></p>
+                        <p class="center" id="wordChangeToolCount">0</p>
+                    </div>
+                    <div id="encodeTool">
+                        <p class="encode icon"></p>
+                        <p class="center" id="encodeToolCount">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="level" class="center">
+            <div class="relative">
+                <div class="star-container">
+                    <svg class="star-svg" viewBox="0 0 24 24">
+                        <polygon class="star-polygon" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                </div>
+                <p class="levelNumber"></p>
+            </div>
+
+        </div>
+        <div id="game" class="centAbs">
+            <div id="wordCol">
+            </div>
+            <div class="center">
+                <div class="button activeButton" id="randButton"></div>
+            </div>
+        </div>
+        <div id="footer">
+            <span id="store"></span>
+            <span id="wordCollect"></span>
+        </div>
+        <div id="foundedWord" class="centAbs none">
+            <div class="sign close" id="closeFoundedWord">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" height="20px" width="20px" version="1.1" id="Capa_1" viewBox="0 0 460.775 460.775" xml:space="preserve">
+<path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55  c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55  c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505  c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55  l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719  c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"/>
+</svg>
+            </div>
+        </div>
+        <div id="levelUp" class="centAbs none">
+            <div class="sign close" id="closeLevelUp">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" height="20px" width="20px" version="1.1" id="Capa_1" viewBox="0 0 460.775 460.775" xml:space="preserve">
+<path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55  c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55  c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505  c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55  l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719  c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"/>
+</svg>
+            </div>
+        </div>
+    </div>
+    <div id="wordInfo" class="height100 scroll none">
+        <div class="sign close">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" height="20px" width="20px" version="1.1" id="Capa_1" viewBox="0 0 460.775 460.775" xml:space="preserve">
+<path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55  c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55  c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505  c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55  l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719  c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"/>
+</svg>
+        </div>
+        <div class="height100 black" style="backdrop-filter: blur(5px);">
+            <div class="center relative">
+                <div class="relative">
+                    <div class="star-container">
+                        <svg class="star-svg" viewBox="0 0 24 24">
+                            <polygon class="star-polygon" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <p class="levelNumber"></p>
+                </div>
+            </div>
+            <div class="flex around upper white bold childPadding10">
+                <p id="allButton">all</p>
+                <p class="selected" id="notCompletedButton">not completed</p>
+            </div>
+            <div class="shopOrCollecter overflow height100" id="wordCollectElm">
+                <div id="notCompleted" class="flex shopOrCollecter wrap center overflow padCardHeight"></div>
+                <div id="all" class="none flex shopOrCollecter wrap center overflow padCardHeight"></div>
+            </div>
+        </div>
+    </div>
+    <div id="shop" class="centAbs none">
+        <div class="sign close" id="closeShop">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" height="20px" width="20px" version="1.1" id="Capa_1" viewBox="0 0 460.775 460.775" xml:space="preserve">
+<path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55  c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55  c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505  c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55  l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719  c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"/>
+</svg>
+        </div>
+        <div class="height100 white scroll" style="backdrop-filter: blur(5px);" id="contentShop">
+        </div>
+    </div>
+
+    <div id="encode" class="height100 scroll none">
+        <div class="sign close" id="closeEncode">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" height="20px" width="20px" version="1.1" id="Capa_1" viewBox="0 0 460.775 460.775" xml:space="preserve">
+<path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55  c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55  c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505  c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55  l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719  c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"/>
+</svg>
+        </div>
+        <div class="height100 black" style="backdrop-filter: blur(5px);">
+            <div class="center relative">
+                <div class="relative">
+                    <div class="star-container">
+                        <svg class="star-svg" viewBox="0 0 24 24">
+                            <polygon class="star-polygon" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <p class="levelNumber"></p>
+                </div>
+            </div>
+            <div class="shopOrCollecter overflow height100 flex" id="encodeElms">
+            </div>
+        </div>
+    </div>
+    <script src="script.js" type="module"></script>
+</body>
+</html>
