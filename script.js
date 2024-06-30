@@ -243,9 +243,6 @@ function game(){
         else{
             text = newText;
         }
-        console.log(text)
-        // text = "ARM"
-        // newText = "ARM"
         if(ignoreWords.includes(text.toLowerCase())){
             return generateText(length, index);
         }
@@ -273,7 +270,7 @@ function game(){
         return alphabet[Math.floor(Math.random() * alphabet.length)];
     }
     function renderLevel(){
-        // checkLevelIsCompleted(); //open this code after test
+        checkLevelIsCompleted(); //open this code after test
         levelElm.forEach((_) => _.innerText = userData.level);
     }
     function levelUp(){
