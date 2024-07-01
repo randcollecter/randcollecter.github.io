@@ -199,7 +199,14 @@ function game(){
                             changedWordCollect = true;
                              userData.balance += elm.level * 2;
                             setBalanceScore();
-                            if(elem.length === 0){
+                            let isLevelUp = true;
+                            for(let el in sortedData){
+                                if(sortedData[el].length > 0){
+                                    isLevelUp = false;
+                                    break;
+                                }
+                            }
+                            if(isLevelUp){
                                 levelUp();
                             }
                             save();
@@ -246,7 +253,6 @@ function game(){
         if(ignoreWords.includes(text.toLowerCase())){
             return generateText(length, index);
         }
-
         return [newText, text];
     }
     function sortingData(){
@@ -275,17 +281,6 @@ function game(){
     }
     function levelUp(){
         userData.level++;
-        let nextLvlCompleted = true;
-        const d = data[userData.level-1];
-        for(let i = 0; i < d.length; i++){
-            if(d[i].complated === false){
-                nextLvlCompleted = false;
-                break;
-            }
-        }
-        if(nextLvlCompleted){
-            return levelUp();
-        }
         renderLevel();
         changedWordCollect = true;
         setLength(userData.level);
